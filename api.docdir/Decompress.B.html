@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Decompress.Hunk.html">
+<link rel="Up" href="Decompress.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Decompress" rel="Chapter" href="Decompress.html"><title>Decompress.B</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Decompress.html" title="Decompress">Up</a>
+&nbsp;<a class="post" href="Decompress.Hunk.html" title="Decompress.Hunk">Next</a>
+</div>
+<h1>Module <a href="type_Decompress.B.html">Decompress.B</a></h1>
+
+<pre><span class="keyword">module</span> B: <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.B.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><hr width="100%">
+
+<pre><code><span id="TYPEst"><span class="keyword">type</span> <code class="type"></code>st</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTst.St"><span class="constructor">St</span></span></code></td>
+
+</tr></table>
+
+
+
+<pre><code><span id="TYPEbs"><span class="keyword">type</span> <code class="type"></code>bs</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTbs.Bs"><span class="constructor">Bs</span></span></code></td>
+
+</tr></table>
+
+
+
+<pre><span class="keyword">module</span> <a href="Decompress.B.Bigstring.html">Bigstring</a>: <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.B.Bigstring.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>
+<pre><code><span id="TYPEt"><span class="keyword">type</span> <code class="type">'a</code> t</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.Bytes"><span class="constructor">Bytes</span></span> <span class="keyword">:</span> <code class="type">Bytes.t</code> <span class="keyword">-></span> <code class="type"><a href="Decompress.B.html#TYPEst">st</a> <a href="Decompress.B.html#TYPEt">t</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTt.Bigstring"><span class="constructor">Bigstring</span></span> <span class="keyword">:</span> <code class="type"><a href="Decompress.B.Bigstring.html#TYPEt">Bigstring.t</a></code> <span class="keyword">-></span> <code class="type"><a href="Decompress.B.html#TYPEbs">bs</a> <a href="Decompress.B.html#TYPEt">t</a></code></code></td>
+
+</tr></table>
+
+
+
+<pre><span id="VALfrom_bytes"><span class="keyword">val</span> from_bytes</span> : <code class="type">Bytes.t -> <a href="Decompress.B.html#TYPEst">st</a> <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALfrom_bigstring"><span class="keyword">val</span> from_bigstring</span> : <code class="type"><a href="Decompress.B.Bigstring.html#TYPEt">Bigstring.t</a> -> <a href="Decompress.B.html#TYPEbs">bs</a> <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALfrom"><span class="keyword">val</span> from</span> : <code class="type">proof:'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> 'a <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALlength"><span class="keyword">val</span> length</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int</code></pre>
+<pre><span id="VALget"><span class="keyword">val</span> get</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> char</code></pre>
+<pre><span id="VALset"><span class="keyword">val</span> set</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> char -> unit</code></pre>
+<pre><span id="VALget_u16"><span class="keyword">val</span> get_u16</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int</code></pre>
+<pre><span id="VALget_u32"><span class="keyword">val</span> get_u32</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int32</code></pre>
+<pre><span id="VALget_u64"><span class="keyword">val</span> get_u64</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int64</code></pre>
+<pre><span id="VALset_u16"><span class="keyword">val</span> set_u16</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int -> unit</code></pre>
+<pre><span id="VALset_u32"><span class="keyword">val</span> set_u32</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int32 -> unit</code></pre>
+<pre><span id="VALset_u64"><span class="keyword">val</span> set_u64</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int64 -> unit</code></pre>
+<pre><span id="VALto_string"><span class="keyword">val</span> to_string</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> string</code></pre>
+<pre><span id="VALblit"><span class="keyword">val</span> blit</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> 'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int -> unit</code></pre>
+<pre><span id="VALsub"><span class="keyword">val</span> sub</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int -> 'a <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALfill"><span class="keyword">val</span> fill</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">t</a> -> int -> int -> char -> unit</code></pre>
+<pre><span id="VALpp"><span class="keyword">val</span> pp</span> : <code class="type">Format.formatter -> 'a <a href="Decompress.B.html#TYPEt">t</a> -> unit</code></pre>
+<pre><span id="VALempty"><span class="keyword">val</span> empty</span> : <code class="type">proof:'a <a href="Decompress.B.html#TYPEt">t</a> -> 'a <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALproof_bytes"><span class="keyword">val</span> proof_bytes</span> : <code class="type"><a href="Decompress.B.html#TYPEst">st</a> <a href="Decompress.B.html#TYPEt">t</a></code></pre>
+<pre><span id="VALproof_bigstring"><span class="keyword">val</span> proof_bigstring</span> : <code class="type"><a href="Decompress.B.html#TYPEbs">bs</a> <a href="Decompress.B.html#TYPEt">t</a></code></pre></body></html>

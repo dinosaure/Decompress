@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Decompress.Hunk.html">
+<link rel="next" href="Decompress.Deflate.html">
+<link rel="Up" href="Decompress.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Decompress" rel="Chapter" href="Decompress.html"><title>Decompress.L</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Decompress.Hunk.html" title="Decompress.Hunk">Previous</a>
+&nbsp;<a class="up" href="Decompress.html" title="Decompress">Up</a>
+&nbsp;<a class="post" href="Decompress.Deflate.html" title="Decompress.Deflate">Next</a>
+</div>
+<h1>Module <a href="type_Decompress.L.html">Decompress.L</a></h1>
+
+<pre><span class="keyword">module</span> L: <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.L.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info module top">
+Lz77 algorithm.
+<p>
+
+    A functionnal non-blocking implementation of Lz77 algorithm. This algorithm
+    produces a <code class="code"><span class="constructor">Hunk</span>.t list</code> of an input.
+<p>
+
+    This algorithm is the same as <a href="blosclz">https://github.com/Blosc/c-blosc</a>.
+    So the implementation is an imperative hack in OCaml. May be it's not the
+    best in the functionnal world but it works. The interface was thinked to be
+    replaced by your implemenation by a functor.
+<p>
+
+    The functor was not done now but may be soonly. So, TODO!<br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEerror"><span class="keyword">type</span> <code class="type"></code>error</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_level"><span class="constructor">Invalid_level</span></span> <span class="keyword">of</span> <code class="type">int</code></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when you try to
+                               compute the Lz77 algorithm with a
+                               wrong level
+                               (<code class="code">level &gt;= 0 <span class="keywordsign">&amp;&amp;</span> level &lt;= 9</code>).<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_wbits"><span class="constructor">Invalid_wbits</span></span> <span class="keyword">of</span> <code class="type">int</code></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when you specify a bad wbits:
+                               <code class="code">wbits &gt;= 8 <span class="keywordsign">&amp;&amp;</span> wbits &lt;= 15</code><br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr></table>
+
+<div class="info ">
+Lz77 error.<br>
+</div>
+
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">'i</code> t</span> </pre>
+<div class="info ">
+The state of the Lz77 algorithm.<br>
+</div>
+
+
+<pre><span id="VALpp_error"><span class="keyword">val</span> pp_error</span> : <code class="type">Format.formatter -> <a href="Decompress.L.html#TYPEerror">error</a> -> unit</code></pre><div class="info ">
+Pretty-printer of Lz77 error.<br>
+</div>
+
+<pre><span id="VALpp"><span class="keyword">val</span> pp</span> : <code class="type">Format.formatter -> 'i <a href="Decompress.L.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+Pretty-printer of Lz77 state.<br>
+</div>
+
+<pre><span id="VALused_in"><span class="keyword">val</span> used_in</span> : <code class="type">'i <a href="Decompress.L.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">used_in t</code> returns <code class="code">n</code> bytes(s) used by the algorithm in the current
+      input.<br>
+</div>
+
+<pre><span id="VALdefault"><span class="keyword">val</span> default</span> : <code class="type">?level:int -> ?on:(<a href="Decompress.Hunk.html#TYPEt">Decompress.Hunk.t</a> -> unit) -> int -> 'i <a href="Decompress.L.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">default ~level ~on wbits</code> produces a new state to compute the Lz77
+      algorithm in an input. <code class="code">level</code> means the level of the compression
+      (between 0 and 9), <code class="code">on</code> is a function called when the algorithm produce
+      one <code class="code"><span class="constructor">Hunk</span>.t</code> and <code class="code">wbits</code> is the window size allowed.
+<p>
+
+      Usually, <code class="code">wbits = 15</code> for a window of 32K. If <code class="code">wbits</code> is lower, you
+      constraint the distance of a <code class="code"><span class="constructor">Match</span></code> produced by the Lz77 algorithm to
+      the window size.
+<p>
+
+      <code class="code">on</code> is a function to interact fastly with your data-structure and keep
+      the frequencies of the <code class="code"><span class="constructor">Literal</span></code> and <code class="code"><span class="constructor">Match</span></code>.<br>
+</div>
+</body></html>

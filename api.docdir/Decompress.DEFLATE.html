@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Decompress.INFLATE.html">
+<link rel="Up" href="Decompress.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Decompress" rel="Chapter" href="Decompress.html"><title>Decompress.DEFLATE</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="Decompress.html" title="Decompress">Up</a>
+&nbsp;<a class="post" href="Decompress.INFLATE.html" title="Decompress.INFLATE">Next</a>
+</div>
+<h1>Module type <a href="type_Decompress.DEFLATE.html">Decompress.DEFLATE</a></h1>
+
+<pre><span class="keyword">module type</span> DEFLATE = <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.DEFLATE.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info modtype top">
+Deflate algorithm.
+<p>
+
+    A functionnal non-blocking implementation of Zlib algorithm.<br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEerror"><span class="keyword">type</span> <code class="type"></code>error</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Lz77_error"><span class="constructor">Lz77_error</span></span> <span class="keyword">of</span> <code class="type"><a href="Decompress.L.html#TYPEerror">Decompress.L.error</a></code></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when the Lz77
+                                algorithm produces an error, see
+                                <a href="Decompress.L.html#TYPEerror"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">L</span>.error</code></a>.<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr></table>
+
+<div class="info ">
+Deflate error.<br>
+</div>
+
+
+<pre><span class="keyword">module</span> <a href="Decompress.DEFLATE.F.html">F</a>: <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.DEFLATE.F.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info">
+Frequencies module.
+</div>
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">('i, 'o)</code> t</span> </pre>
+<div class="info ">
+The state of the deflate algorithm. <code class="code"><span class="keywordsign">'</span>i</code> and <code class="code"><span class="keywordsign">'</span>o</code> are the implementation
+      used respectively for the input and the ouput, see <a href="Decompress.B.html#TYPEst"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.st</code></a> and <a href="Decompress.B.html#TYPEbs"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.bs</code></a>.
+      The typer considers than <code class="code"><span class="keywordsign">'</span>i = <span class="keywordsign">'</span>o</code>.<br>
+</div>
+
+
+<pre><span id="VALpp_error"><span class="keyword">val</span> pp_error</span> : <code class="type">Format.formatter -> <a href="Decompress.DEFLATE.html#TYPEerror">error</a> -> unit</code></pre><div class="info ">
+Pretty-printer of deflate error.<br>
+</div>
+
+<pre><span id="VALpp"><span class="keyword">val</span> pp</span> : <code class="type">Format.formatter -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+Pretty-printer of deflate state.<br>
+</div>
+
+<pre><span id="VALget_frequencies"><span class="keyword">val</span> get_frequencies</span> : <code class="type">('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> <a href="Decompress.DEFLATE.F.html#TYPEt">F.t</a></code></pre><div class="info ">
+<code class="code">get_frequencies t</code> returns the current frequencies of the deflate state.
+      See <a href="Decompress.DEFLATE.F.html#TYPEt"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.<span class="constructor">F</span>.t</code></a>.<br>
+</div>
+
+<pre><span id="VALset_frequencies"><span class="keyword">val</span> set_frequencies</span> : <code class="type">?paranoid:bool -><br>       <a href="Decompress.DEFLATE.F.html#TYPEt">F.t</a> -><br>       ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">set_frequencies f t</code> replaces the frequencies of the state <code class="code">t</code> by <code class="code">f</code>.
+      The paranoid mode (if <code class="code">paranoid = <span class="keyword">true</span></code>) checks if the frequencies
+      can be used with the internal <code class="code"><span class="constructor">Hunk</span>.t list</code>. That means, for all
+      characters and patterns (see <a href="Decompress.Hunk.html#TYPEt"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">Hunk</span>.t</code></a>), the binding
+      frequencie must be <code class="code">&gt; 0</code> (however, this check takes a long time).
+<p>
+
+      eg. if we have a <code class="code"><span class="constructor">Literal</span> <span class="string">'a'</span></code>, <code class="code">(fst f).(<span class="constructor">Char</span>.code <span class="string">'a'</span>) &gt; 0</code>.<br>
+</div>
+
+<pre><span id="VALfinish"><span class="keyword">val</span> finish</span> : <code class="type">('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">finish t</code> means all input was sended. <code class="code">t</code> will produce a new zlib block
+      with the <code class="code">final</code> flag and write the checksum of the input stream.<br>
+</div>
+
+<pre><span id="VALno_flush"><span class="keyword">val</span> no_flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">no_flush off len t</code> means to continue the compression of an input at
+      <code class="code">off</code> on <code class="code">len</code> byte(s).<br>
+</div>
+
+<pre><span id="VALpartial_flush"><span class="keyword">val</span> partial_flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">partial_flush off len t</code> finishes the current block, then the encoder
+      writes a fixed empty block. So, the output is not aligned. We keep the
+      current frequencies to compute the new Huffman tree for the new next
+      block.<br>
+</div>
+
+<pre><span id="VALsync_flush"><span class="keyword">val</span> sync_flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">sync_flush off len t</code> finishes the current block, then the encoder writes
+      a stored empty block and the output is aligned. We keep the current
+      frequencies to compute the new Huffman tree for the new next block.<br>
+</div>
+
+<pre><span id="VALfull_flush"><span class="keyword">val</span> full_flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">full_flush off len t</code> finishes the current block, then the encoder writes
+      a stored empty block and the output is aligned. We delete the current
+      frequencies to compute a new frequencies from your input and write a new
+      Huffman tree for the new next block.<br>
+</div>
+
+<pre><code><span id="TYPEmeth"><span class="keyword">type</span> <code class="type"></code>meth</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmeth.PARTIAL"><span class="constructor">PARTIAL</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmeth.SYNC"><span class="constructor">SYNC</span></span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmeth.FULL"><span class="constructor">FULL</span></span></code></td>
+
+</tr></table>
+
+
+
+<pre><span id="VALflush_of_meth"><span class="keyword">val</span> flush_of_meth</span> : <code class="type"><a href="Decompress.DEFLATE.html#TYPEmeth">meth</a> -><br>       int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">flush_of_meth meth</code> returns the function depending to the method. Like,
+      <code class="code">flush_of_meth <span class="constructor">SYNC</span></code> returns <code class="code">sync_flush</code>. It's a convenience function,
+      nothing else.<br>
+</div>
+
+<pre><span id="VALflush"><span class="keyword">val</span> flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">flush off len t</code> allows the state <code class="code">t</code> to use an output at <code class="code">off</code> on <code class="code">len</code>
+      byte(s).<br>
+</div>
+
+<pre><span id="VALeval"><span class="keyword">val</span> eval</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -><br>       [ `Await of ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a><br>       | `End of ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a><br>       | `Error of ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a> * <a href="Decompress.DEFLATE.html#TYPEerror">error</a><br>       | `Flush of ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a> ]</code></pre><div class="info ">
+<code class="code">eval i o t</code> computes the state <code class="code">t</code> with the input <code class="code">i</code> and the ouput <code class="code">o</code>.
+      This function returns:<ul>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Await</span> t</code>: the state <code class="code">t</code> waits a new input</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Flush</span> t</code>: the state <code class="code">t</code> completes the output, may be you use
+        <a href="Decompress.DEFLATE.html#VALflush"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.flush</code></a>.</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">End</span> t</code>: means that the deflate algorithm is done in your input. May
+        be <code class="code">t</code> writes something in your output. You can check with <a href="Decompress.DEFLATE.html#VALused_out"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.used_out</code></a>.</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Error</span> (t, exn)</code>: the algorithm catches an error <code class="code">exn</code>.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="VALused_in"><span class="keyword">val</span> used_in</span> : <code class="type">('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">used_in t</code> returns how many byte(s) was used by <code class="code">t</code> in the input.<br>
+</div>
+
+<pre><span id="VALused_out"><span class="keyword">val</span> used_out</span> : <code class="type">('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">used_out t</code> returns how many byte(s) was used by <code class="code">t</code> in the output.<br>
+</div>
+
+<pre><span id="VALdefault"><span class="keyword">val</span> default</span> : <code class="type">proof:'o <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> ?wbits:int -> int -> ('i, 'o) <a href="Decompress.DEFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">default ~proof ?wbits level</code> makes a new state <code class="code">t</code>. <code class="code">~proof</code> is an <code class="code"><span class="keywordsign">'</span>a
+      <span class="constructor">B</span>.t</code> specialized with an implementation (see <a href="Decompress.B.html#TYPEst"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.st</code></a> or <a href="Decompress.B.html#TYPEbs"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.bs</code></a>) to
+      informs the state wich implementation you use.
+<p>
+
+      <code class="code">?wbits</code> (by default, <code class="code">wbits = 15</code>) it's the size of the window used by
+      the Lz77 algorithm (see <a href="Decompress.L.html#VALdefault"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">L</span>.default</code></a>).
+<p>
+
+      <code class="code">?meth</code> can be specified to flush the internal buffer of the compression
+      and create a new zlib block at <code class="code">n</code> bytes specified.
+<p>
+
+      <code class="code">level</code> is level compression:<ul>
+<li>0: a stored compression (no compression)</li>
+<li>1 .. 3: a fixed compression (compression with a static huffman tree)</li>
+<li>4 .. 9: a dynamic compression (compression with a canonic huffman tree
+                produced by the input)</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="VALto_result"><span class="keyword">val</span> to_result</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       ?meth:<a href="Decompress.DEFLATE.html#TYPEmeth">meth</a> * int -><br>       ('a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> int option -> int) -><br>       ('a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> int -> int) -><br>       ('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -><br>       (('a, 'a) <a href="Decompress.DEFLATE.html#TYPEt">t</a>, <a href="Decompress.DEFLATE.html#TYPEerror">error</a>) Pervasives.result</code></pre><div class="info ">
+<code class="code">to_result i o refill flush t</code> is a convenience function to apply the
+      deflate algorithm on the stream <code class="code">refill</code> and call <code class="code">flush</code> when the
+      internal output is full (and need to flush).
+<p>
+
+      If the compute catch an error, we returns <code class="code"><span class="constructor">Error</span> exn</code>
+      (see <a href="Decompress.DEFLATE.html#TYPEerror"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.error</code></a>). Otherwise, we returns the <i>useless</i> state <code class="code">t</code>.<br>
+</div>
+
+<pre><span id="VALbytes"><span class="keyword">val</span> bytes</span> : <code class="type">Bytes.t -><br>       Bytes.t -><br>       ?meth:<a href="Decompress.DEFLATE.html#TYPEmeth">meth</a> * int -><br>       (Bytes.t -> int option -> int) -><br>       (Bytes.t -> int -> int) -><br>       (<a href="Decompress.B.html#TYPEst">Decompress.B.st</a>, <a href="Decompress.B.html#TYPEst">Decompress.B.st</a>) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -><br>       ((<a href="Decompress.B.html#TYPEst">Decompress.B.st</a>, <a href="Decompress.B.html#TYPEst">Decompress.B.st</a>) <a href="Decompress.DEFLATE.html#TYPEt">t</a>,<br>        <a href="Decompress.DEFLATE.html#TYPEerror">error</a>)<br>       Pervasives.result</code></pre><div class="info ">
+Specialization of <a href="Decompress.DEFLATE.html#VALto_result"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.to_result</code></a> with <code class="code"><span class="constructor">B</span>.<span class="constructor">Bytes</span>.t</code>.<br>
+</div>
+
+<pre><span id="VALbigstring"><span class="keyword">val</span> bigstring</span> : <code class="type"><a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -><br>       <a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -><br>       ?meth:<a href="Decompress.DEFLATE.html#TYPEmeth">meth</a> * int -><br>       (<a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -> int option -> int) -><br>       (<a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -> int -> int) -><br>       (<a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>, <a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>) <a href="Decompress.DEFLATE.html#TYPEt">t</a> -><br>       ((<a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>, <a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>) <a href="Decompress.DEFLATE.html#TYPEt">t</a>,<br>        <a href="Decompress.DEFLATE.html#TYPEerror">error</a>)<br>       Pervasives.result</code></pre><div class="info ">
+Specialization of <a href="Decompress.DEFLATE.html#VALto_result"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">DEFLATE</span>.to_result</code></a> with <a href="Decompress.B.Bigstring.html#TYPEt"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.<span class="constructor">Bigstring</span>.t</code></a>.<br>
+</div>
+</body></html>

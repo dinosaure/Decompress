@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Decompress.DEFLATE.html">
+<link rel="Up" href="Decompress.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Decompress" rel="Chapter" href="Decompress.html"><title>Decompress.INFLATE</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Decompress.DEFLATE.html" title="Decompress.DEFLATE">Previous</a>
+&nbsp;<a class="up" href="Decompress.html" title="Decompress">Up</a>
+&nbsp;</div>
+<h1>Module type <a href="type_Decompress.INFLATE.html">Decompress.INFLATE</a></h1>
+
+<pre><span class="keyword">module type</span> INFLATE = <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.INFLATE.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info modtype top">
+Inflate algorithm.
+<p>
+
+    A functionnal non-blocking implementation of Zlib algorithm.<br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEerror"><span class="keyword">type</span> <code class="type"></code>error</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_kind_of_block"><span class="constructor">Invalid_kind_of_block</span></span></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when the kind of
+                                the current block is wrong.<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_complement_of_length"><span class="constructor">Invalid_complement_of_length</span></span></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when we
+                                       compute a stored block and
+                                       length do not correspond with
+                                       the complement of length.<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_dictionary"><span class="constructor">Invalid_dictionary</span></span></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+This error appears when we compute a
+                             dynamic block and we catch an error when
+                             we try to decode the dictionary.<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTerror.Invalid_crc"><span class="constructor">Invalid_crc</span></span></code></td>
+<td class="typefieldcomment" align="left" valign="top" ><code>(*</code></td><td class="typefieldcomment" align="left" valign="top" ><div class="info ">
+The checksum of the output produced does not
+                      equal with the checksum of the stream.<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom" ><code>*)</code></td>
+</tr></table>
+
+<div class="info ">
+Inflate error.<br>
+</div>
+
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">('i, 'o)</code> t</span> </pre>
+<div class="info ">
+The state of the inflate algorithm. <code class="code"><span class="keywordsign">'</span>i</code> and <code class="code"><span class="keywordsign">'</span>o</code> are the implementation
+      used respectively for the input and the output, see <a href="Decompress.B.html#TYPEst"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.st</code></a> and <a href="Decompress.B.html#TYPEbs"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.bs</code></a>.
+      The typer considers than <code class="code"><span class="keywordsign">'</span>i = <span class="keywordsign">'</span>o</code>.<br>
+</div>
+
+
+<pre><span id="VALpp_error"><span class="keyword">val</span> pp_error</span> : <code class="type">Format.formatter -> <a href="Decompress.INFLATE.html#TYPEerror">error</a> -> unit</code></pre><div class="info ">
+Pretty-printer of inflate error.<br>
+</div>
+
+<pre><span id="VALpp"><span class="keyword">val</span> pp</span> : <code class="type">Format.formatter -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+Pretty-printer of inflate state.<br>
+</div>
+
+<pre><span id="VALeval"><span class="keyword">val</span> eval</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a> -><br>       [ `Await of ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a><br>       | `End of ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a><br>       | `Error of ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a> * <a href="Decompress.INFLATE.html#TYPEerror">error</a><br>       | `Flush of ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a> ]</code></pre><div class="info ">
+<code class="code">eval i o t</code> computes the state <code class="code">t</code> with the input <code class="code">i</code> and the output
+      <code class="code">o</code>. This function returns:<ul>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Await</span> t</code>: the state <code class="code">t</code> waits a new input, may be you use <a href="Decompress.INFLATE.html#VALrefill"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.refill</code></a>.</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Flush</span> t</code>: the state <code class="code">t</code> completes the output, may be you use
+        <a href="Decompress.INFLATE.html#VALflush"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.flush</code></a>.</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">End</span> t</code>: means that the deflate algorithm is done in your input. May
+        be <code class="code">t</code> writes something in your output. You can check with <a href="Decompress.INFLATE.html#VALused_out"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.used_out</code></a>.</li>
+<li><code class="code"><span class="keywordsign">`</span><span class="constructor">Error</span> (t, exn)</code>: the algorithm catches an error <code class="code">exn</code>.</li>
+</ul>
+<br>
+</div>
+
+<pre><span id="VALrefill"><span class="keyword">val</span> refill</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">refill off len t</code> allows the state <code class="code">t</code> to use an output at <code class="code">off</code> on
+      <code class="code">len</code> byte(s).<br>
+</div>
+
+<pre><span id="VALflush"><span class="keyword">val</span> flush</span> : <code class="type">int -> int -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">flush off len t</code> allows the state <code class="code">t</code> to use an output at <code class="code">off</code> on <code class="code">len</code>
+      byte(s).<br>
+</div>
+
+<pre><span id="VALused_in"><span class="keyword">val</span> used_in</span> : <code class="type">('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">used_in t</code> returns how many byte(s) was used by <code class="code">t</code> in the input.<br>
+</div>
+
+<pre><span id="VALused_out"><span class="keyword">val</span> used_out</span> : <code class="type">('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">used_out ŧ</code> returns how many byte(s) was used by <code class="code">t</code> in the output.<br>
+</div>
+
+<pre><span id="VALwrite"><span class="keyword">val</span> write</span> : <code class="type">('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<code class="code">write t</code> returns the size of the stream decompressed.<br>
+</div>
+
+<pre><span id="VALdefault"><span class="keyword">val</span> default</span> : <code class="type">'o <a href="Decompress.Window.html#TYPEt">Decompress.Window.t</a> -> ('i, 'o) <a href="Decompress.INFLATE.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">default</code> makes a new state <code class="code">t</code>.<br>
+</div>
+
+<pre><span id="VALto_result"><span class="keyword">val</span> to_result</span> : <code class="type">'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       'a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -><br>       ('a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> int) -><br>       ('a <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> int -> int) -><br>       ('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a> -><br>       (('a, 'a) <a href="Decompress.INFLATE.html#TYPEt">t</a>, <a href="Decompress.INFLATE.html#TYPEerror">error</a>) Pervasives.result</code></pre><div class="info ">
+<code class="code">to_result i o refill flush t</code> is a convenience function to apply the
+      inflate algorithm on the stream <code class="code">refill</code> and call <code class="code">flush</code> when the
+      internal output is full (and need to flush).
+<p>
+
+      If the compute catch an error, we returns <code class="code"><span class="constructor">Error</span> exn</code>
+      (see <a href="Decompress.INFLATE.html#TYPEerror"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.error</code></a>). Otherwise, we returns the state <i>useless</i> <code class="code">t</code>.<br>
+</div>
+
+<pre><span id="VALbytes"><span class="keyword">val</span> bytes</span> : <code class="type">Bytes.t -><br>       Bytes.t -><br>       (Bytes.t -> int) -><br>       (Bytes.t -> int -> int) -><br>       (<a href="Decompress.B.html#TYPEst">Decompress.B.st</a>, <a href="Decompress.B.html#TYPEst">Decompress.B.st</a>) <a href="Decompress.INFLATE.html#TYPEt">t</a> -><br>       ((<a href="Decompress.B.html#TYPEst">Decompress.B.st</a>, <a href="Decompress.B.html#TYPEst">Decompress.B.st</a>) <a href="Decompress.INFLATE.html#TYPEt">t</a>,<br>        <a href="Decompress.INFLATE.html#TYPEerror">error</a>)<br>       Pervasives.result</code></pre><div class="info ">
+Specialization of <a href="Decompress.INFLATE.html#VALto_result"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.to_result</code></a> with <code class="code"><span class="constructor">B</span>.<span class="constructor">Bytes</span>.t</code>.<br>
+</div>
+
+<pre><span id="VALbigstring"><span class="keyword">val</span> bigstring</span> : <code class="type"><a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -><br>       <a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -><br>       (<a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -> int) -><br>       (<a href="Decompress.B.Bigstring.html#TYPEt">Decompress.B.Bigstring.t</a> -> int -> int) -><br>       (<a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>, <a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>) <a href="Decompress.INFLATE.html#TYPEt">t</a> -><br>       ((<a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>, <a href="Decompress.B.html#TYPEbs">Decompress.B.bs</a>) <a href="Decompress.INFLATE.html#TYPEt">t</a>,<br>        <a href="Decompress.INFLATE.html#TYPEerror">error</a>)<br>       Pervasives.result</code></pre><div class="info ">
+Specialization of <a href="Decompress.INFLATE.html#VALto_result"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">INFLATE</span>.to_result</code></a> with <a href="Decompress.B.Bigstring.html#TYPEt"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.<span class="constructor">Bigstring</span>.t</code></a>.<br>
+</div>
+</body></html>

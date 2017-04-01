@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Decompress.Deflate.html">
+<link rel="next" href="Decompress.Inflate.html">
+<link rel="Up" href="Decompress.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Decompress" rel="Chapter" href="Decompress.html"><title>Decompress.Window</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Decompress.Deflate.html" title="Decompress.Deflate">Previous</a>
+&nbsp;<a class="up" href="Decompress.html" title="Decompress">Up</a>
+&nbsp;<a class="post" href="Decompress.Inflate.html" title="Decompress.Inflate">Next</a>
+</div>
+<h1>Module <a href="type_Decompress.Window.html">Decompress.Window</a></h1>
+
+<pre><span class="keyword">module</span> Window: <code class="code"><span class="keyword">sig</span></code> <a href="Decompress.Window.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><div class="info module top">
+Window used by the Inflate algorithm.
+<p>
+
+    A functionnal implementation of window to use with the inflate algorithm.
+    After one process, you can <code class="code">reset</code> and reuse the window for a new process.
+    This API is available to limit the allocation by Decompress.<br>
+</div>
+<hr width="100%">
+
+<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type">'o</code> t</span> </pre>
+<div class="info ">
+The Window specialized by <code class="code"><span class="keywordsign">'</span>o</code> (see <a href="Decompress.B.html#TYPEst"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.st</code></a> and <a href="Decompress.B.html#TYPEbs"><code class="code"><span class="constructor">Decompress</span>.<span class="constructor">B</span>.bs</code></a>).<br>
+</div>
+
+
+<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">proof:'o <a href="Decompress.B.html#TYPEt">Decompress.B.t</a> -> 'o <a href="Decompress.Window.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">create ~proof</code> creates a new window.<br>
+</div>
+
+<pre><span id="VALreset"><span class="keyword">val</span> reset</span> : <code class="type">'o <a href="Decompress.Window.html#TYPEt">t</a> -> 'o <a href="Decompress.Window.html#TYPEt">t</a></code></pre><div class="info ">
+<code class="code">reset window</code> resets a window to be reused by an Inflate algorithm.<br>
+</div>
+
+<pre><span id="VALcrc"><span class="keyword">val</span> crc</span> : <code class="type">'o <a href="Decompress.Window.html#TYPEt">t</a> -> Int32.t</code></pre><div class="info ">
+<code class="code">crc window</code> returns the checksum computed by the window.<br>
+</div>
+</body></html>
